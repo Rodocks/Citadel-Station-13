@@ -2869,4 +2869,6 @@
 #include "modular_citadel\code\modules\vore\eating\voreitems.dm"
 #include "modular_citadel\code\modules\vore\eating\vorepanel_vr.dm"
 #include "modular_citadel\interface\skin.dmf"
+#include "modular_nubon\code\myst.dm"
+#include "modular_nubon\code\modules\world_save\Map Storage.dm"
 // END_INCLUDE
