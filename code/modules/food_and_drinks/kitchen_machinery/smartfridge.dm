@@ -8,7 +8,6 @@
 	icon_state = "smartfridge"
 	layer = BELOW_OBJ_LAYER
 	density = TRUE
-	anchored = TRUE
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 5
 	active_power_usage = 100
@@ -314,7 +313,9 @@
 	return FALSE
 
 /obj/machinery/smartfridge/drying_rack/emp_act(severity)
-	..()
+	. = ..()
+	if(. & EMP_PROTECT_SELF)
+		return
 	atmos_spawn_air("TEMP=1000")
 
 

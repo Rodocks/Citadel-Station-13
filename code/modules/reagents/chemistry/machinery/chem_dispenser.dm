@@ -2,7 +2,6 @@
 	name = "chem dispenser"
 	desc = "Creates and dispenses chemicals."
 	density = TRUE
-	anchored = TRUE
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "dispenser"
 	use_power = IDLE_POWER_USE
@@ -315,6 +314,9 @@ obj/machinery/chem_dispenser/proc/work_animation()
 	return cell
 
 /obj/machinery/chem_dispenser/emp_act(severity)
+	. = ..()
+	if(. & EMP_PROTECT_SELF)
+		return
 	var/list/datum/reagents/R = list()
 	var/total = min(rand(7,15), FLOOR(cell.charge*powerefficiency, 1))
 	var/datum/reagents/Q = new(total*10)
@@ -330,7 +332,6 @@ obj/machinery/chem_dispenser/proc/work_animation()
 	cell.emp_act(severity)
 	work_animation()
 	visible_message("<span class='danger'>[src] malfunctions, spraying chemicals everywhere!</span>")
-	..()
 
 
 /obj/machinery/chem_dispenser/RefreshParts()
@@ -403,7 +404,6 @@ obj/machinery/chem_dispenser/proc/work_animation()
 /obj/machinery/chem_dispenser/drinks
 	name = "soda dispenser"
 	desc = "Contains a large reservoir of soft drinks."
-	anchored = TRUE
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "soda_dispenser"
 	has_panel_overlay = FALSE
@@ -447,7 +447,6 @@ obj/machinery/chem_dispenser/proc/work_animation()
 /obj/machinery/chem_dispenser/drinks/beer
 	name = "booze dispenser"
 	desc = "Contains a large reservoir of the good stuff."
-	anchored = TRUE
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "booze_dispenser"
 	circuit = /obj/item/circuitboard/machine/chem_dispenser/drinks/beer
